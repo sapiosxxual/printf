@@ -36,7 +36,7 @@ int print_pointer(va_list types, char buffer[], int flags, int width, int
 		length++;
 	}
 	if ((flags & F_ZERO) && !(flags & F_MINUS))
-		padd = '\0';
+		padd = '0';
 	if (flags & F_PLUS)
 	{
 		extra_ch = '+';
@@ -174,4 +174,3 @@ int print_rot13string(va_list types, char buffer[], int flags, int width, int
 	}
 	return (count);
 }
-

@@ -100,7 +100,7 @@ int print_reverse(va_list types, char buffer[], int flags, int width, int size,
 		int precision)
 {
 	char *str;
-	int i, j, count = 0;
+	int i, count = 0;
 
 	UNUSED(buffer);
 	UNUSED(flags);
@@ -134,7 +134,7 @@ int print_reverse(va_list types, char buffer[], int flags, int width, int size,
  * @width: getting the width
  * Return: number of chars printed
  */
-int print_rot13strijg(va_list types, char buffer[], int flags, int width, int
+int print_rot13string(va_list types, char buffer[], int flags, int width, int
 		precision, int size)
 {
 	char x, *str;
@@ -160,7 +160,7 @@ int print_rot13strijg(va_list types, char buffer[], int flags, int width, int
 			{
 				x = out[j];
 				write(1, &x, 1);
-				count;
+				count++;
 				break;
 			}
 		}

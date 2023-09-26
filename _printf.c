@@ -1,12 +1,16 @@
 #include "main.h"
-void print_buffer(char buffer[], int *buff_ind);
 /**
  * _printf - this is a printf function
  * @format: format to be printed
+ * @i: takimf a parameter
  * Return: the printed characters
  */
-int _printf(char *format);
-int _printf(char *format, ...)
+int get_flags(const char *format, int *i);
+int get_width(const char *format, int *i, va_list list);
+int get_precision(const char *format, int *i, va_list list);
+int get_size(const char *format, int *i);
+void print_buffer(char buffer[], int *buff_index);
+int _printf(const char *format, ...)
 {
 	int i;
 	int printed = 0;
@@ -35,7 +39,7 @@ int _printf(char *format, ...)
 		}
 		else
 		{
-			print_buffer(buffer, &buff_ind);
+			print_buffer(buffer, &buff_index);
 			flags = get_flags(format, &i);
 			width = get_width(format, &i, list);
 			precision = get_precision(format, &i, list);

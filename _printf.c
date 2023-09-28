@@ -1,6 +1,4 @@
 #include "main.h"
-#include <unistd.h>
-#include <stdarg.h>
 /**
  * _putchar - write a char to stdout
  * @c: char to be printed
@@ -15,14 +13,16 @@ int _putchar(char c)
  * @format: the format string
  * Return: the no of chars printed
  */
+int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
 	int count = 0;
 	va_list args;
+	unsigned int n;
+	char *str;
 
 	if (format == NULL)
 		return (-1);
-
 	va_start(args, format);
 	while (*format)
 	{
@@ -37,19 +37,50 @@ int _printf(const char *format, ...)
 			if (*format == '\0')
 				return (-1);
 			if (*format == 'c')
-				_putchar(va_arg(args, int)), count++;
+			{
+				_putchar(va_arg(args, int));
+				count++;
+			}
 			else if (*format == 's')
 				count += _print_str(va_arg(args, char *));
 			else if (*format == '%')
-				_putchar('%'), count++;
+			{
+				_putchar('%');
+				count++;
+			}
 			else if (*format == 'd' || *format == 'i')
 				count += _print_int(va_arg(args, int));
 			else if (*format == 'b')
 				count += _print_binary(va_arg(args, unsigned int));
+			else if (*format == 'u')
+			{
+				n = va_arg(args, unsigned int);
+				count += print_unsgnd(n);
+			}
+			else if (*format == 'o')
+			{
+				n = va_arg(args, unsigned int);
+				count += print_octal(n);
+			}
+			else if (*format == 'x' || *format == 'X')
+			{
+				n = va_arg(args, unsigned int);
+			   	count += print_hex(*format, n);
+			}
+			else if (*format == 'S')
+			{
+				if (str == NULL)
+					str = "(null";
+				count += print_S(str);
+			}
+			else if (*format == 'p')
+			{
+				n = va_arg(args, unsigned int);
+				count += print_pointer(n);
+			}
 			else
 			{
-				_putchar('%');
-				_putchar(*format);
+				_putchar('%'), _putchar(*format);
 				count += 2;
 			}
 		}

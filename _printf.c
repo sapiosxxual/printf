@@ -20,18 +20,28 @@ int _printf(const char *format, ...)
 	int count = 0;
 	va_list args;
 
+	if (format == NULL)
+		return (-1);
+
 	va_start(args, format);
-	while (*format && format)
+	while (*format)
 	{
-		if (*format == '%')
+		if (*format != '%')
+		{
+			_putchar(*format);
+			count++;
+		}
+		else
 		{
 			format++;
+			if (*format == '\0')
+				return (-1);
 			if (*format == 'c')
-				count += _putchar(va_arg(args, int));
+				_putchar(va_arg(args, int)), count++;
 			else if (*format == 's')
 				count += _print_str(va_arg(args, char *));
 			else if (*format == '%')
-				count += _putchar('%');
+				_putchar('%'), count++;
 			else if (*format == 'd' || *format == 'i')
 				count += _print_int(va_arg(args, int));
 			else if (*format == 'b')
@@ -39,12 +49,9 @@ int _printf(const char *format, ...)
 			else
 			{
 				_putchar('%');
-				count++;
+				_putchar(*format);
+				count += 2;
 			}
-		}
-		else
-		{
-			count += _putchar(*format);
 		}
 		format++;
 	}
@@ -58,17 +65,22 @@ int _printf(const char *format, ...)
  */
 int _print_int(int n)
 {
+	unsigned int num;
 	int count = 0;
 
 	if (n < 0)
 	{
+		num = -n;
 		_putchar('-');
 		count++;
-		n = -n;
 	}
-	if (n / 10)
-		count += _print_int(n / 10);
-	_putchar((n % 10) + '0');
+	else
+	{
+		num = n;
+	}
+	if (num / 10 != 0)
+		count += _print_int(num / 10);
+	_putchar((num % 10) + '0');
 	count++;
 
 	return (count);
@@ -84,14 +96,17 @@ int _print_str(char *str)
 
 	if (str == NULL)
 	{
-		str = "(null)";
+		_putchar('(');
+		_print_str("null");
+		_putchar(')');
+		return (6);
 	}
 
 	while (*str)
 	{
 		_putchar(*str);
-		count++;
 		str++;
+		count++;
 	}
 	return (count);
 }
@@ -103,24 +118,17 @@ int _print_str(char *str)
 int _print_binary(unsigned int n)
 {
 	int count = 0;
-	int binary[32];
-	int i = 0;
 
 	if (n == 0)
 	{
 		_putchar('0');
 		return (1);
 	}
-	while (n > 0)
-	{
-		binary[i] = n % 2;
-		n = n / 2;
-		i++;
-	}
-	for (i = i - 1; i >= 0; i--)
-	{
-		_putchar(binary[i] + '0');
+	do {
+		_putchar((n & 1) + '0');
+		n >>= 1;
 		count++;
-	}
+	} while (n != 0);
+
 	return (count);
 }

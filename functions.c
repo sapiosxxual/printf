@@ -6,7 +6,7 @@
  */
 int print_unsgnd(unsigned int n)
 {
-	char buffer[1024];
+	char buffer[1024] = {0};
 	int i = 0;
 
 	if (n == 0)
@@ -26,7 +26,7 @@ int print_unsgnd(unsigned int n)
 		_putchar(buffer[i]);
 		i--;
 	}
-	return (i + 1);
+	return (i);
 }
 /**
  * print_octal - prints unsigned integer octal

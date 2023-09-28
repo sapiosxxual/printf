@@ -118,17 +118,24 @@ int _print_str(char *str)
 int _print_binary(unsigned int n)
 {
 	int count = 0;
+	int binary[32];
+	int i = 0;
 
 	if (n == 0)
 	{
 		_putchar('0');
 		return (1);
 	}
-	do {
-		_putchar((n & 1) + '0');
-		n >>= 1;
+	while (n > 0)
+	{
+		binary[i] = n % 2;
+		n = n / 2;
+		i++;
+	}
+	for (i = i - 1; i >= 0; i--)
+	{
+		_putchar(binary[i] + '0');
 		count++;
-	} while (n != 0);
-
+	}
 	return (count);
 }

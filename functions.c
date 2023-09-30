@@ -8,6 +8,7 @@ int print_unsgnd(unsigned int n)
 {
 	char buffer[1024] = {0};
 	int i = 0;
+	int count = 0;
 
 	if (n == 0)
 	{
@@ -19,6 +20,7 @@ int print_unsgnd(unsigned int n)
 		buffer[i] = (n % 10) + '0';
 		n /= 10;
 		i++;
+		count++;
 	}
 	i--;
 	while (i >= 0)
@@ -26,7 +28,7 @@ int print_unsgnd(unsigned int n)
 		_putchar(buffer[i]);
 		i--;
 	}
-	return (i);
+	return (count);
 }
 /**
  * print_octal - prints unsigned integer octal

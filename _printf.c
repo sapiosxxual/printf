@@ -20,6 +20,7 @@ int _printf(const char *format, ...)
 	va_list args;
 	unsigned int n;
 	char *str;
+	int printed_chars;
 
 	if (format == NULL)
 		return (-1);
@@ -55,7 +56,8 @@ int _printf(const char *format, ...)
 			else if (*format == 'u')
 			{
 				n = va_arg(args, unsigned int);
-				count += print_unsgnd(n);
+				printed_chars = print_unsgnd(n);
+				count += printed_chars;
 			}
 			else if (*format == 'o')
 			{

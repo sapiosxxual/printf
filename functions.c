@@ -108,21 +108,26 @@ int print_S(char *str)
 	int count = 0;
 	int i = 0;
 
-	while (str[i])
+	if (str == NULL)
+	{
+		_printf("(null)");
+	   	return (6);
+	}
+
+	for (i = 0; str[i]; i++)
 	{
 		if (str[i] < 32 || str[i] >= 127)
 		{
 			_putchar('\\');
 			_putchar('x');
 			count += 2;
-			count = print_hex('X', str[i]);
+			count += print_hex('X', str[i]);
 		}
 		else
 		{
 			_putchar(str[i]);
 			count++;
 		}
-		i++;
 	}
 	return (count);
 }

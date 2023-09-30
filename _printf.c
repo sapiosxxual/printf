@@ -71,8 +71,9 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 'S')
 			{
+				str = va_arg(args, char *);
 				if (str == NULL)
-					str = "(null";
+					str = "(null)";
 				count += print_S(str);
 			}
 			else if (*format == 'p')

@@ -72,7 +72,7 @@ int print_hex(char format, unsigned int n)
 {
 	char buffer[1024];
 	int i = 0;
-	int count;
+	int count = 0;
 	char hex_chars[] = "0123456789ABCDEF";
 
 	if (n == 0)

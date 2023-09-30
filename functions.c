@@ -39,6 +39,7 @@ int print_octal(unsigned int n)
 {
 	char buffer[1024];
 	int i = 0;
+	int count = 0;
 
 	if (n == 0)
 	{
@@ -50,6 +51,7 @@ int print_octal(unsigned int n)
 		buffer[i] = (n % 8) + '0';
 		n /= 8;
 		i++;
+		count++;
 	}
 	i--;
 
@@ -58,7 +60,7 @@ int print_octal(unsigned int n)
 		_putchar(buffer[i]);
 		i--;
 	}
-	return (i + 1);
+	return (count);
 }
 /**
  * print_hex - prints unsigned int in hexadecimal
@@ -70,6 +72,7 @@ int print_hex(char format, unsigned int n)
 {
 	char buffer[1024];
 	int i = 0;
+	int count;
 	char hex_chars[] = "0123456789ABCDEF";
 
 	if (n == 0)
@@ -82,6 +85,7 @@ int print_hex(char format, unsigned int n)
 		buffer[i] = hex_chars[n % 16];
 		n /= 16;
 		i++;
+		count++;
 	}
 	i--;
 	while (i >= 0)
@@ -92,7 +96,7 @@ int print_hex(char format, unsigned int n)
 		_putchar(buffer[i]);
 		i--;
 	}
-	return (i + 1);
+	return (count);
 }
 /**
  * print_S - prints a string with non printable char
